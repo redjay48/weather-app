@@ -1,0 +1,74 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+
+}
+
+.place, h2, span {
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+#search {
+    position: relative;
+    left: 25%;
+    margin-bottom: 30px;
+}
+
+#data {
+    width: 30em;
+    padding: 18px;
+    border: 1px solid #e0e0e0;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+
+#top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#co-ord {
+    text-align: center;
+}
+
+#date {
+    text-align: right;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+#temp-main {
+    display: flex;
+    gap: 10px;
+}
+
+#temp-main>button {
+    border: none;
+    background-color: white;
+    color: #888888;
+    padding: 0;
+}
+
+#temp-main>button:active, #temp-main>button:hover {
+    color: black;
+}
+
+.temp-range {
+    display: flex;
+    gap: 130px;
+    
+}
+
+.max, .min {
+    margin: 0;
+    font-size: 24px;
+}
