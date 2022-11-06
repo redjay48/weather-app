@@ -1,15 +1,29 @@
 const searchBar = document.querySelector("#search-bar");
 const searchBtn = document.getElementById("search-btn");
+const celsius = document.querySelector(".celsius");
+const fahrenheit = document.querySelector(".fahrenheit");
+const tempBtns = document.getElementsByClassName("temp-btn");
+const tempMain = document.querySelector(".temp");
+const tempMax = document.querySelector(".max");
+const tempMin = document.querySelector(".min");
+const city = document.querySelector('.city');
+const country = document.querySelector('.country');
+const lat = document.querySelector('.lat');
+const lon = document.querySelector('lon');
+const day = document.querySelector('.day');
+const date = document.querySelector('.date');
+const timeZone = document.querySelector('.timezone');
+const weatherIcon = document.querySelector('#weather-icon');
+const weatherType = document.querySelector('.weather-type');
+const weatherDescr = document.querySelector('.descr');
+const humid = document.querySelector('.humid');
+const cloud = document.querySelector('.cloud');
+const feelsLike = document.querySelector('.feels-like');
+const windSpeed = document.querySelector('.wind-speed');
 
-// searchBtn.addEventListener('click', function() {
-//     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${searchBar.value}&APPID=95e569ea6908c8defcf7629bc3f9281d`, {mode: 'cors'})
-//     .then(function(response) {
-//         return response.json();
-//     })
-//     .then(function(response) {
-//         console.log(response);
-//     })
-// })
+let cActive = false;
+let fActive = false;
+
 
 async function getInfo() {
   const response = await fetch(
@@ -21,6 +35,46 @@ async function getInfo() {
 }
 
 searchBtn.addEventListener("click", getInfo);
+
+for (const btn of tempBtns) {
+  btn.addEventListener("click", (e) => {
+    tempActive(e);
+    tempChange(e);
+    btnDisable(e);
+  });
+}
+
+function tempChange(e) {
+  if (Array.from(tempBtns).indexOf(e.target) === 0 && cActive === false) {
+    tempMain.textContent = Number(tempMain.textContent) - 273.15 + "°";
+    tempMax.textContent = Number(tempMax.textContent) - 273.15 + "°";
+    tempMin.textContent = Number(tempMin.textContent) - 273.15 + "°";
+    cActive = true;
+  } else if (Array.from(tempBtns).indexOf(e.target) === 1 && fActive === false) {
+    tempMain.textContent = (Number(tempMain.textContent) - 273.15) * 9/5 + 32 + "°";
+    tempMin.textContent = (Number(tempMin.textContent) - 273.15) * 9/5 + 32 + "°";
+    tempMax.textContent = (Number(tempMax.textContent) - 273.15) * 9/5 + 32 + "°";
+    
+  }
+}
+
+function tempActive(e) {
+  e.target.classList.add("select");
+  if (Array.from(tempBtns).indexOf(e.target) === 0) {
+    Array.from(tempBtns)[1].classList.remove("select");
+  } else {
+    Array.from(tempBtns)[0].classList.remove("select");
+  }
+}
+
+function btnDisable(e) {
+  if (Array.from(tempBtns).indexOf(e.target) === 0) {
+    e.target.disabled = true;
+    Array.from(tempBtns)[1].disabled = false;
+  } else {
+    Array.from(tempBtns)[0].disabled = false;
+  }
+}
 
 const countryList = {
   AF: "Afghanistan",
