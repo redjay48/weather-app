@@ -7,7 +7,7 @@ body {
 
 }
 
-.place, h2, span {
+.city, h2, span, .temp-btn {
     font-size: 36px;
     margin: 0;
     padding: 0;
@@ -24,12 +24,16 @@ body {
     padding: 18px;
     border: 1px solid #e0e0e0;
     display: grid;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr;
 }
 
 #top {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.country {
+    font-size: large;
 }
 
 #co-ord {
@@ -51,14 +55,18 @@ body {
     gap: 10px;
 }
 
-#temp-main>button {
+.celsius, .fahrenheit {
     border: none;
     background-color: white;
-    color: #888888;
+    color: #969494;
     padding: 0;
 }
 
-#temp-main>button:active, #temp-main>button:hover {
+.celsius:hover, .fahrenheit:hover {
+    color: rgb(82, 82, 82);
+}
+
+.select, .fahrenheit:disabled, .celsius:disabled {
     color: black;
 }
 
@@ -71,4 +79,12 @@ body {
 .max, .min {
     margin: 0;
     font-size: 24px;
+}
+
+#weather {
+    text-align: right;
+}
+
+#minor {
+    margin-top: 52px;
 }
