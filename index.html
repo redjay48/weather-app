@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Exo&family=Nunito+Sans:wght@300&family=Roboto&family=Stick+No+Bills:wght@300;500&display=swap"
+        rel="stylesheet">
     <title>weather temp</title>
 </head>
 
@@ -17,51 +22,53 @@
             <button id="search-btn">Search</button>
         </div>
 
-        <div id="data">
-            <div id="top">
-                <div id="region">
-                    <h2 class="city">Guwahati</h2>
-                    <p class="country">India</p>
-                </div>
-                <div id="co-ord">
-                    <p class="lat">lat:</p>
-                    <p class="lon">lon:</p>
-                </div>
-                <div id="date">
-                    <p class="day">Saturday</p>
-                    <p class="date">07 Nov 2022</p>
-                    <p class="time">11:40PM</p>
-                    <p class="timezone">Timezone: +5:30</p>
-                </div>
-            </div>
-            <div id="main">
-                <div id="temp">
-                    <div id="temp-main">
-                        <h2 class="temp">302.15</h2>
-                        <button class="temp-btn celsius">C</button> 
-                        <span>|</span>
-                        <button class="temp-btn fahrenheit">F</button>
+        <div id="background">
+            <div id="data">
+                <div id="top">
+                    <div id="region">
+                        <h2 class="city"></h2>
+                        <p class="country"></p>
                     </div>
-                    <div id="bottom">
-                        <img src="https://openweathermap.org/img/wn/04d@4x.png" alt="" id="weather-icon">
-                        <div class="temp-range">
-                            <p class="max">304.15</p>
-                            <p class="min">302.15</p>
+                    <div id="co-ord">
+                        <p class="lat"></p>
+                        <p class="lon"></p>
+                    </div>
+                    <div id="date">
+                        <p class="day"></p>
+                        <p class="date"></p>
+                        <p class="time"></p>
+                        <p class="timezone"></p>
+                    </div>
+                </div>
+                <div id="main">
+                    <div id="temp">
+                        <div id="temp-main">
+                            <h2 class="temp"></h2>
+                            <button class="temp-btn celsius">C</button>
+                            <span class="bar">|</span>
+                            <button class="temp-btn fahrenheit">F</button>
+                        </div>
+                        <div id="bottom">
+                            <img src="" alt="" id="weather-icon">
+                            <div class="temp-range">
+                                <p class="max"></p>
+                                <p class="min"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="weather">
+                        <h2 class="weather-type"></h2>
+                        <p class="descr"></p>
+                        <div id="minor">
+                            <p class="humid"></p>
+                            <p class="cloud"> </p>
+                            <p class="feels-like"></p>
+                            <p class="wind-speed"></p>
                         </div>
                     </div>
                 </div>
-                <div id="weather">
-                    <h2 class="weather-type">Fog</h2>
-                    <p class="descr">some info about weather</p>
-                    <div id="minor">
-                        <p class="humid">Humidity: 29%</p>
-                        <p class="cloud"> Cloudiness: 40%</p>
-                        <p class="feels-like">Feels Like: 29</p>
-                        <p class="wind-speed">Wind Speed: 6kmph</p>
-                    </div>
-                </div>
+    
             </div>
-           
         </div>
     </div>
     <script src="main.js"></script>
