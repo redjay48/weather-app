@@ -6,22 +6,54 @@ const tempBtns = document.getElementsByClassName("temp-btn");
 const tempMain = document.querySelector(".temp");
 const tempMax = document.querySelector(".max");
 const tempMin = document.querySelector(".min");
-const city = document.querySelector('.city');
-const country = document.querySelector('.country');
-const lat = document.querySelector('.lat');
-const lon = document.querySelector('.lon');
-const day = document.querySelector('.day');
-const date = document.querySelector('.date');
-const time = document.querySelector('.time');
-const timeZone = document.querySelector('.timezone');
-const weatherIcon = document.querySelector('#weather-icon');
-const weatherType = document.querySelector('.weather-type');
-const weatherDescr = document.querySelector('.descr');
-const humid = document.querySelector('.humid');
-const cloud = document.querySelector('.cloud');
-const feelsLike = document.querySelector('.feels-like');
-const windSpeed = document.querySelector('.wind-speed');
+const city = document.querySelector(".city");
+const country = document.querySelector(".country");
+const lat = document.querySelector(".lat");
+const lon = document.querySelector(".lon");
+const day = document.querySelector(".day");
+const date = document.querySelector(".date");
+const time = document.querySelector(".time");
+const timeZone = document.querySelector(".timezone");
+const weatherIcon = document.querySelector("#weather-icon");
+const weatherType = document.querySelector(".weather-type");
+const weatherDescr = document.querySelector(".descr");
+const humid = document.querySelector(".humid");
+const cloud = document.querySelector(".cloud");
+const feelsLike = document.querySelector(".feels-like");
+const windSpeed = document.querySelector(".wind-speed");
 
+//Geolocation function
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+function success(pos) {
+  const crd = pos.coords;
+  getLocationInfo(crd.latitude, crd.longitude);
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+//Populate by location
+
+async function getLocationInfo(lat, lon) {
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=95e569ea6908c8defcf7629bc3f9281d`,
+    { mode: "cors" }
+  );
+  const weatherData = await response.json();
+  console.log(weatherData);
+  funMain(weatherData);
+}
+
+//Populate by Searching
 
 async function getInfo() {
   const response = await fetch(
@@ -30,16 +62,22 @@ async function getInfo() {
   );
   const weatherData = await response.json();
   console.log(weatherData);
-    populate(weatherData);
-    tempFun(weatherData);
-    bgImg(weatherData);
-    for (const btn of tempBtns) {
-      btn.addEventListener("click", (e) => {
-        tempActive(e);
-        tempChange(e, weatherData);
-        btnDisable(e);
-      });
-    }
+  funMain(weatherData);
+  document.querySelector(".fahrenheit").disabled = false;
+  document.querySelector(".fahrenheit").classList.remove("select");
+}
+
+function funMain(weatherData) {
+  populate(weatherData);
+  tempFun(weatherData);
+  bgImg(weatherData);
+  for (const btn of tempBtns) {
+    btn.addEventListener("click", (e) => {
+      tempActive(e);
+      tempChange(e, weatherData);
+      btnDisable(e);
+    });
+  }
 }
 
 function populate(data) {
@@ -47,39 +85,59 @@ function populate(data) {
   country.textContent = countryName(data);
   lat.textContent = `lat: ${data.coord.lat}`;
   lon.textContent = `lon: ${data.coord.lon}`;
-  timeZone.textContent = `Timezone: ${(data.timezone)/3600}`;
+  timeZone.textContent = `Timezone: GMT ${data.timezone / 3600}`;
   weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
   weatherType.textContent = data.weather[0].main;
   weatherDescr.textContent = data.weather[0].description;
   humid.textContent = "Humidity: " + data.main.humidity + "%";
   cloud.textContent = "Cloudiness: " + data.clouds.all + "%";
-  windSpeed.textContent = "Wind Speed: " + data.wind.speed + "m/s";
-  day.textContent = format(new Date(), 'eeee');
-  date.textContent = format(new Date(), 'dd MMM yyyy');
+  windSpeed.textContent =
+    "Wind Speed: " +
+    (data.wind.speed * 3.6).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] +
+    "kmph";
+  day.textContent = format(new Date(), "eeee");
+  date.textContent = format(new Date(), "dd MMM yyyy");
   time.textContent = format(new Date(), "hh':'mm aa");
 }
 
 function bgImg(data) {
-  const url = `img/${(data.weather[0].main).toLowerCase()}.jpg`;
-  console.log(url);
-  document.getElementById('data').style.backgroundImage = `url('${url}')`;
+  const url = `img/${data.weather[0].main.toLowerCase()}.jpg`;
+  document.getElementById("data").style.backgroundImage = `url('${url}')`;
 }
 
 function tempFun(data) {
   defaultTemp(data);
-    celsius.disabled = true;
+  celsius.disabled = true;
 }
 
 function defaultTemp(data) {
-  tempMain.textContent = (Number(data.main.temp) - 273.15).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°";
-    tempMax.textContent = (Number(data.main.temp_max) - 273.15).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°C";
-    tempMin.textContent = (Number(data.main.temp_min) - 273.15).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°C";
-    feelsLike.textContent = "Feels Like: " + (Number(data.main.feels_like) - 273.15).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°C" ;
+  tempMain.textContent =
+    (Number(data.main.temp) - 273.15)
+      .toString()
+      .match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°";
+  tempMax.textContent =
+    (Number(data.main.temp_max) - 273.15)
+      .toString()
+      .match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°C";
+  tempMin.textContent =
+    (Number(data.main.temp_min) - 273.15)
+      .toString()
+      .match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°C";
+  feelsLike.textContent =
+    "Feels Like: " +
+    (Number(data.main.feels_like) - 273.15)
+      .toString()
+      .match(/^-?\d+(?:\.\d{0,2})?/)[0] +
+    "°C";
+  windSpeed.textContent =
+    "Wind Speed: " +
+    (data.wind.speed * 3.6).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] +
+    "kmph";
 }
 
 function countryName(data) {
   for (const country in countryList) {
-    if (data.sys.country === country) {  
+    if (data.sys.country === country) {
       return countryList[country];
     }
   }
@@ -87,18 +145,32 @@ function countryName(data) {
 
 searchBtn.addEventListener("click", getInfo);
 
-
-
 function tempChange(e, data) {
   if (Array.from(tempBtns).indexOf(e.target) === 0) {
     defaultTemp(data);
-
   } else if (Array.from(tempBtns).indexOf(e.target) === 1) {
-    tempMain.textContent = ((Number(data.main.temp) - 273.15) * 9/5 + 32).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°";
-    tempMin.textContent = ((Number(data.main.temp_max) - 273.15) * 9/5 + 32).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°F";
-    tempMax.textContent = ((Number(data.main.temp_min) - 273.15) * 9/5 + 32).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°F";
-    feelsLike.textContent = "Feels Like: " + ((Number(data.main.feels_like) - 273.15) * 9/5 + 32).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°F";
-
+    tempMain.textContent =
+      (((Number(data.main.temp) - 273.15) * 9) / 5 + 32)
+        .toString()
+        .match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°";
+    tempMin.textContent =
+      (((Number(data.main.temp_max) - 273.15) * 9) / 5 + 32)
+        .toString()
+        .match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°F";
+    tempMax.textContent =
+      (((Number(data.main.temp_min) - 273.15) * 9) / 5 + 32)
+        .toString()
+        .match(/^-?\d+(?:\.\d{0,2})?/)[0] + "°F";
+    feelsLike.textContent =
+      "Feels Like: " +
+      (((Number(data.main.feels_like) - 273.15) * 9) / 5 + 32)
+        .toString()
+        .match(/^-?\d+(?:\.\d{0,2})?/)[0] +
+      "°F";
+    windSpeed.textContent =
+      "Wind Speed: " +
+      (data.wind.speed * 2.237).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0] +
+      "mph";
   }
 }
 
