@@ -102,7 +102,7 @@ function populate(data) {
 
 function bgImg(data) {
   const url = `img/${data.weather[0].main.toLowerCase()}.jpg`;
-  document.getElementById("data").style.backgroundImage = `url('${url}')`;
+  document.getElementById("background").style.background = `url('${url}')`;
 }
 
 function tempFun(data) {

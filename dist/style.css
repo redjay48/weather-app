@@ -4,7 +4,6 @@ body {
     justify-content: center;
     align-items: center;
     width: auto;
-
 }
 
 .city, h2, span, .temp-btn {
@@ -20,11 +19,24 @@ body {
 }
 
 #data {
-    width: 30em;
+    width: 600px;
+    height: 730px;
     padding: 18px;
-    border: 1px solid #e0e0e0;
+    z-index: 1;
     display: grid;
     grid-template-rows: 1fr 2fr;
+    color: rgb(63, 54, 54);
+}
+
+#background {
+    border: 2px solid #a5a5a5;
+    border-radius: 14px;
+    opacity: .2;
+}
+
+div:not(#background){
+    opacity: 1;
+    z-index: 2;
 }
 
 #top {
@@ -36,8 +48,16 @@ body {
     font-size: large;
 }
 
-#co-ord {
+#co-ord>p  {
     text-align: center;
+}
+
+.lon {
+    margin: 0;
+}
+
+.lat {
+    margin-bottom: 0;
 }
 
 #date {
@@ -87,4 +107,53 @@ body {
 
 #minor {
     margin-top: 52px;
+    
+}
+
+#temp-main, .temp-range, .temp-btn {
+    font-family: 'Stick No Bills', sans-serif;
+}
+
+.temp, .temp-btn, .bar {
+    font-size: 60px;
+    
+}
+
+.temp {
+    font-weight: 500;
+}
+
+.temp-btn, .bar {
+    font-weight: 300;
+}
+
+
+.temp-btn {
+    background-color: #11ffee00
+}
+
+.city, .country, .weather-type, .descr {
+    font-family: 'Exo', sans-serif;
+
+}
+
+.city, .weather-type {
+    font-size: 48px;
+    font-weight: 400;
+}
+
+.country, .descr {
+    font-size: 28px;
+    margin-top: 8px;
+}
+
+.lat, .lon , #minor {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#date {
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
 }
