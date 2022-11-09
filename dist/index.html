@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Exo&family=Nunito+Sans:wght@300&family=Roboto&family=Stick+No+Bills:wght@300;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Exo&family=Nunito+Sans:wght@300&family=Stick+No+Bills:wght@200;500&display=swap"
         rel="stylesheet">
     <title>weather temp</title>
 </head>
@@ -22,10 +22,11 @@
             <button id="search-btn">Search</button>
         </div>
 
-        <div id="background">
-            <div id="data">
-                <div id="top">
-                    <div id="region">
+
+        <div id="data">
+            <div id="top">
+                <div id="region">
+                    <div id="region-top">
                         <h2 class="city"></h2>
                         <p class="country"></p>
                     </div>
@@ -33,42 +34,43 @@
                         <p class="lat"></p>
                         <p class="lon"></p>
                     </div>
-                    <div id="date">
-                        <p class="day"></p>
-                        <p class="date"></p>
-                        <p class="time"></p>
-                        <p class="timezone"></p>
-                    </div>
                 </div>
-                <div id="main">
-                    <div id="temp">
-                        <div id="temp-main">
-                            <h2 class="temp"></h2>
-                            <button class="temp-btn celsius">C</button>
-                            <span class="bar">|</span>
-                            <button class="temp-btn fahrenheit">F</button>
-                        </div>
-                        <div id="bottom">
-                            <img src="" alt="" id="weather-icon">
-                            <div class="temp-range">
-                                <p class="max"></p>
-                                <p class="min"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="weather">
-                        <h2 class="weather-type"></h2>
-                        <p class="descr"></p>
-                        <div id="minor">
-                            <p class="humid"></p>
-                            <p class="cloud"> </p>
-                            <p class="feels-like"></p>
-                            <p class="wind-speed"></p>
-                        </div>
-                    </div>
+
+                <div id="date">
+                    <p class="day"></p>
+                    <p class="date"></p>
+                    <p class="time"></p>
+                    <p class="timezone"></p>
                 </div>
-    
             </div>
+            <div id="main">
+                <div id="temp">
+                    <div id="temp-main">
+                        <h2 class="temp"></h2>
+                        <button class="temp-btn celsius">C</button>
+                        <span class="bar">|</span>
+                        <button class="temp-btn fahrenheit">F</button>
+                    </div>
+                    <div id="bottom">
+                        <img src="" alt="" id="weather-icon">
+                        <div class="temp-range">
+                            <p class="max"></p>
+                            <p class="min"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="weather">
+                    <h2 class="weather-type"></h2>
+                    <p class="descr"></p>
+                    <div id="minor">
+                        <p class="humid"></p>
+                        <p class="cloud"> </p>
+                        <p class="feels-like"></p>
+                        <p class="wind-speed"></p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <script src="main.js"></script>
