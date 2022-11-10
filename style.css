@@ -4,16 +4,30 @@ body:not(#data) {
   justify-content: center;
   align-items: center;
   width: auto;
-  background-color: rgb(226, 218, 208);
+  background-color: #8e9493;
+  margin: 0;
+}
+
+#heading {
+  width: 100vw;
+}
+
+
+
+#thunderstorm, #cloudy-snow, #rain, #clear-day {
+  font-size: 56px;
+  margin-top: 10px;
+  margin: 10px 10px 0 10px;
 }
 
 h1 {
   font-family: "Baloo 2", cursive;
-  font-size: 56px;
+  font-size: 60px;
   font-weight: 500;
-  color: rgb(88, 77, 77);
-  margin: 0;
+  color: #c8d3d4;
+  background-color: #3e3f3f;
   text-align: center;
+  margin: 0;
 }
 
 input {
@@ -32,7 +46,7 @@ input:focus {
   width: 260px;
   border: 1px solid rgb(88, 77, 77);
   border-radius: 5px;
-  box-shadow: 2px 1px 3px 2px rgb(204, 204, 204);
+
 }
 
 #search-btn {
@@ -67,18 +81,20 @@ span,
 #search {
   position: relative;
   left: 21%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 #data {
   width: 540px;
-  height: 750px;
+  height: 670px;
   padding: 50px;
   display: grid;
   grid-template-rows: 1fr 2fr;
   color: rgb(63, 54, 54);
   border: 2px solid #a5a5a5;
   border-radius: 14px;
+  
 }
 
 #top {
@@ -92,7 +108,7 @@ span,
 }
 
 #co-ord {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 .country {
   font-size: large;
@@ -201,6 +217,7 @@ span,
 .descr {
   font-size: 28px;
   margin-top: 8px;
+  margin-bottom: 0;
 }
 
 .lat,
